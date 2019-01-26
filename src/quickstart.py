@@ -10,22 +10,19 @@ import argparse
 SCOPES = 'https://www.googleapis.com/auth/drive.readonly'
 FILE_ID_FILEPATH = 'google_drive_file_id.txt'
 
-def main(file_path):
+def main(file_path, file_id):
     """Downloads file from Google Drive and saves it in the argument filepath
     """
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    store = file.Storage('token.json')
+    store = file.Storage('../google_drive_api_quickstart/token.json')
     creds = store.get()
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        flow = client.flow_from_clientsecrets(
+                '../google_drive_api_quickstart/credentials.json', SCOPES)
         creds = tools.run_flow(flow, store)
     drive_service = build('drive', 'v3', http=creds.authorize(Http()))
-    
-    # File ID to download
-    with open(FILE_ID_FILEPATH, 'r') as myfile:
-        file_id = myfile.read().replace('\n', '')
     
     # Downloadning file
     request = drive_service.files().export_media(
@@ -46,9 +43,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('output_filepath', type=str,
                     help='the filepath to save the downloaded file')
+    parser.add_argument('google_drive_file_id', type=str,
+                    help='the id of the google drive file')
     args = parser.parse_args()
    
-    main(args.output_filepath)
+    main(args.output_filepath, args.google_drive_file_id)
 
 
 

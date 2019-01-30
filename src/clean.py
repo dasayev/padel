@@ -41,7 +41,7 @@ def main(input_filepath, output_filepath) :
                      parse_dates=['date']).sort_values(['date', 'matchNo']
                      ).drop('submitTime', axis=1).reset_index(drop=True)
     df['matchId'] = df.index + 1
-    df = splitCols(df, ['team1', 'team2'], ',')  
+    df = splitCols(df, ['team1', 'team2'], ', ')  
     df = validateDuplPlayers(df)
     df[['matchId', 'date', 'no1team1', 'no2team1', 'no1team2', 'no2team2',
         'set1Team1GamesWon', 'set1Team2GamesWon', 'set2Team1GamesWon', 

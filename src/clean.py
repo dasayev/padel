@@ -43,9 +43,10 @@ def main(input_filepath, output_filepath) :
     df['matchId'] = df.index + 1
     df = splitCols(df, ['team1', 'team2'], ', ')  
     df = validateDuplPlayers(df)
-    df[['matchId', 'date', 'no1team1', 'no2team1', 'no1team2', 'no2team2',
-        'set1Team1GamesWon', 'set1Team2GamesWon', 'set2Team1GamesWon', 
-        'set2Team2GamesWon']].to_csv(output_filepath, index=False)
+    df[['matchId', 'date', 'matchNo', 'no1team1', 'no2team1', 'no1team2', 
+        'no2team2','set1Team1GamesWon', 'set1Team2GamesWon', 
+        'set2Team1GamesWon', 'set2Team2GamesWon']].to_csv(
+        output_filepath, index=False)
     
 if __name__ == '__main__' :
     

@@ -8,7 +8,6 @@ import argparse
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = 'https://www.googleapis.com/auth/drive.readonly'
-FILE_ID_FILEPATH = 'google_drive_file_id.txt'
 
 def main(file_path, file_id):
     """Downloads file from Google Drive and saves it in the argument filepath
@@ -16,11 +15,11 @@ def main(file_path, file_id):
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    store = file.Storage('../google_drive_api_quickstart/token.json')
+    store = file.Storage('google_drive_api_quickstart/token.json')
     creds = store.get()
     if not creds or creds.invalid:
         flow = client.flow_from_clientsecrets(
-                '../google_drive_api_quickstart/credentials.json', SCOPES)
+                'google_drive_api_quickstart/credentials.json', SCOPES)
         creds = tools.run_flow(flow, store)
     drive_service = build('drive', 'v3', http=creds.authorize(Http()))
     

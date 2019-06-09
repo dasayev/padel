@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan 19 15:44:19 2019
-
-@author: Erik
-"""
 import pandas as pd
 import argparse
 

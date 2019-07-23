@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=padelserver.database.windows.net;initial catalog=PadelDB;user id=padelServerAdmin",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlBBREVMREFUQUZBQ1RPUllfMjRiNTI4MjMtMGNkOS00ZDM4LWJkMzctNmMyYTk5ZDg0ODZlIg0KfQ=="
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=padelserver.database.windows.net;initial catalog=PadelDB;user id=padelserverAdmin",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlBBREVMREFUQUZBQ1RPUllfZmU1NTkwODYtZmM1Mi00NTEyLWI0OTEtYjI2ZjNmOWIyMWY0Ig0KfQ=="
 		}
 	}
 }

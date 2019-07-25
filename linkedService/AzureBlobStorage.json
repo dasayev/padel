@@ -1,0 +1,13 @@
+{
+	"name": "AzureBlobStorage",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "The padel blob",
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=padeldiag;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlBBREVMREFUQUZBQ1RPUllfYzkwNzQzMzQtZDZmNy00ZjlmLWE1MDktY2RhMmRhMDEwY2EwIg0KfQ=="
+		}
+	}
+}

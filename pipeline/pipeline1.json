@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Data1",
+				"name": "LoadRawIntoPadelDB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -15,8 +15,34 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSetting",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSetting"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "BULK INSERT RawPadelData\n\tFROM 'C:\\proj\\padel\\output\\padel_results.csv'\n\tWITH (\n\t\tFIRSTROW = 2, --Ignore header row\n\t\tFIELDTERMINATOR = ',',  --CSV field delimiter\n\t\tROWTERMINATOR = '\\n',   --Use to shift the control to next row\n\t\tCODEPAGE = '65001' --Make sure special characters are read correctly\n    );"
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "Raw",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "RawPadelData",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

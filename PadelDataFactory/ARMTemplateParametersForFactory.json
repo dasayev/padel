@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "PadelDataFactory"
+		},
+		"AzureBlobStorage_connectionString": {
+			"value": ""
+		},
+		"GoogleDrive_clientSecret": {
+			"value": ""
+		},
+		"GoogleDrive_refreshToken": {
+			"value": ""
+		},
+		"Padel SQL DB_connectionString": {
+			"value": ""
+		},
+		"GoogleDrive_properties_typeProperties_clientId": {
+			"value": "798006968626-2r6pmbjjlmqi6jvsan0r2lbib869nlm4.apps.googleusercontent.com"
+		}
+	}
+}

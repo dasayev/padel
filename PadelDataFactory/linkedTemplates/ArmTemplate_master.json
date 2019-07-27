@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "PadelDataFactory"
+		},
+		"AzureBlobStorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage'"
+		},
+		"GoogleDrive_clientSecret": {
+			"type": "secureString",
+			"metadata": "Secure string for 'clientSecret' of 'GoogleDrive'"
+		},
+		"GoogleDrive_refreshToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'refreshToken' of 'GoogleDrive'"
+		},
+		"Padel SQL DB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Padel SQL DB'"
+		},
+		"GoogleDrive_properties_typeProperties_clientId": {
+			"type": "string",
+			"defaultValue": "798006968626-2r6pmbjjlmqi6jvsan0r2lbib869nlm4.apps.googleusercontent.com"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage_connectionString": {
+						"value": "[parameters('AzureBlobStorage_connectionString')]"
+					},
+					"GoogleDrive_clientSecret": {
+						"value": "[parameters('GoogleDrive_clientSecret')]"
+					},
+					"GoogleDrive_refreshToken": {
+						"value": "[parameters('GoogleDrive_refreshToken')]"
+					},
+					"Padel SQL DB_connectionString": {
+						"value": "[parameters('Padel SQL DB_connectionString')]"
+					},
+					"GoogleDrive_properties_typeProperties_clientId": {
+						"value": "[parameters('GoogleDrive_properties_typeProperties_clientId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

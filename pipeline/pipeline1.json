@@ -41,7 +41,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "RawPadelData",
+						"referenceName": "PadelData",
 						"type": "DatasetReference"
 					}
 				]

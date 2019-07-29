@@ -29,7 +29,7 @@
 						"type": "AzureSqlSink",
 						"sqlWriterStoredProcedureName": "[dbo].[cusp_InsertPadelData]",
 						"sqlWriterTableType": "PadelDataType",
-						"storedProcedureTableTypeParameterName": "apa"
+						"storedProcedureTableTypeParameterName": "@PadelData"
 					},
 					"enableStaging": false
 				},

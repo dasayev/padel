@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LoadRawIntoPadelDB",
+				"name": "LoadIntoPadelDB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -29,7 +29,7 @@
 						"type": "AzureSqlSink",
 						"sqlWriterStoredProcedureName": "[dbo].[cusp_InsertPadelData]",
 						"sqlWriterTableType": "PadelDataType",
-						"storedProcedureTableTypeParameterName": "@PadelData"
+						"storedProcedureTableTypeParameterName": "apa"
 					},
 					"enableStaging": false
 				},

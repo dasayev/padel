@@ -1,5 +1,5 @@
 {
-	"name": "RawPadelData",
+	"name": "PadelData",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Padel SQL DB",
@@ -9,7 +9,7 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"tableName": "[dbo].[RawPadelData]"
+			"tableName": "[dbo].[PadelData]"
 		}
 	}
 }

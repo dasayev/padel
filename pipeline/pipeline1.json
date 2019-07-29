@@ -27,7 +27,9 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "BULK INSERT RawPadelData\n\tFROM 'C:\\proj\\padel\\output\\padel_results.csv'\n\tWITH (\n\t\tFIRSTROW = 2, --Ignore header row\n\t\tFIELDTERMINATOR = ',',  --CSV field delimiter\n\t\tROWTERMINATOR = '\\n',   --Use to shift the control to next row\n\t\tCODEPAGE = '65001' --Make sure special characters are read correctly\n    );"
+						"sqlWriterStoredProcedureName": "[dbo].[cusp_InsertPadelData]",
+						"sqlWriterTableType": "PadelDataType",
+						"storedProcedureTableTypeParameterName": "@PadelData"
 					},
 					"enableStaging": false
 				},

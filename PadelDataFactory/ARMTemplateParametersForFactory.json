@@ -8,17 +8,11 @@
 		"AzureBlobStorage_connectionString": {
 			"value": ""
 		},
-		"GoogleDrive_clientSecret": {
-			"value": ""
-		},
-		"GoogleDrive_refreshToken": {
-			"value": ""
-		},
 		"Padel SQL DB_connectionString": {
 			"value": ""
 		},
-		"GoogleDrive_properties_typeProperties_clientId": {
-			"value": "798006968626-2r6pmbjjlmqi6jvsan0r2lbib869nlm4.apps.googleusercontent.com"
+		"AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://PadelKeyVault.vault.azure.net/"
 		}
 	}
 }

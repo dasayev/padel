@@ -11,21 +11,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage'"
 		},
-		"GoogleDrive_clientSecret": {
-			"type": "secureString",
-			"metadata": "Secure string for 'clientSecret' of 'GoogleDrive'"
-		},
-		"GoogleDrive_refreshToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'refreshToken' of 'GoogleDrive'"
-		},
 		"Padel SQL DB_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Padel SQL DB'"
 		},
-		"GoogleDrive_properties_typeProperties_clientId": {
+		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
-			"defaultValue": "798006968626-2r6pmbjjlmqi6jvsan0r2lbib869nlm4.apps.googleusercontent.com"
+			"defaultValue": "https://PadelKeyVault.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -39,7 +31,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "LoadRawIntoPadelDB",
+						"name": "LoadIntoPadelDB",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -63,7 +55,9 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"preCopyScript": "BULK INSERT RawPadelData\n\tFROM 'C:\\proj\\padel\\output\\padel_results.csv'\n\tWITH (\n\t\tFIRSTROW = 2, --Ignore header row\n\t\tFIELDTERMINATOR = ',',  --CSV field delimiter\n\t\tROWTERMINATOR = '\\n',   --Use to shift the control to next row\n\t\tCODEPAGE = '65001' --Make sure special characters are read correctly\n    );"
+								"sqlWriterStoredProcedureName": "[[dbo].[cusp_InsertPadelData]",
+								"sqlWriterTableType": "PadelDataType",
+								"storedProcedureTableTypeParameterName": "PadelData"
 							},
 							"enableStaging": false
 						},
@@ -76,7 +70,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "RawPadelData",
+								"referenceName": "PadelData",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -87,7 +81,27 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Raw')]",
-				"[concat(variables('factoryId'), '/datasets/RawPadelData')]"
+				"[concat(variables('factoryId'), '/datasets/PadelData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PadelData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Padel SQL DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "[[dbo].[PadelData]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Padel SQL DB')]"
 			]
 		},
 		{
@@ -147,26 +161,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/RawPadelData')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Padel SQL DB",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"tableName": "[[dbo].[RawPadelData]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Padel SQL DB')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -181,30 +175,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/GoogleDrive')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "GoogleBigQuery",
-				"typeProperties": {
-					"project": "MyProject",
-					"requestGoogleDriveScope": true,
-					"authenticationType": "UserAuthentication",
-					"clientId": "[parameters('GoogleDrive_properties_typeProperties_clientId')]",
-					"clientSecret": {
-						"type": "SecureString",
-						"value": "[parameters('GoogleDrive_clientSecret')]"
-					},
-					"refreshToken": {
-						"type": "SecureString",
-						"value": "[parameters('GoogleDrive_refreshToken')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Padel SQL DB')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -212,18 +182,31 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('Padel SQL DB_connectionString')]"
+					"connectionString": "[parameters('Padel SQL DB_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "AzurePadelServerPassword"
+					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
+			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
+				}
 			},
 			"dependsOn": []
 		}

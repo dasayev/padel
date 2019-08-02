@@ -5,11 +5,11 @@
 		"factoryName": {
 			"value": "PadelDataFactory"
 		},
-		"AzureBlobStorage_connectionString": {
-			"value": ""
-		},
 		"Padel SQL DB_connectionString": {
 			"value": ""
+		},
+		"AzureBlobStorage_properties_typeProperties_connectionString_secretName": {
+			"value": "PadelBlobConnectionString"
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://PadelKeyVault.vault.azure.net/"

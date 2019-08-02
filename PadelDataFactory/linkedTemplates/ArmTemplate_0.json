@@ -7,10 +7,6 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "PadelDataFactory"
 		},
-		"AzureBlobStorage_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage'"
-		},
 		"Padel SQL DB_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Padel SQL DB'"
@@ -18,26 +14,16 @@
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://PadelKeyVault.vault.azure.net/"
+		},
+		"AzureBlobStorage_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "PadelBlobConnectionString"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "The padel blob",
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureKeyVault')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -52,59 +38,25 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Raw')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "padel_results.csv",
-						"container": "padel"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('AzureBlobStorage_properties_typeProperties_connectionString_secretName')]"
 					}
-				]
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
 			]
 		},
 		{
@@ -131,7 +83,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PadelData')]",
+			"name": "[concat(parameters('factoryName'), '/SQL_PadelData')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -148,6 +100,106 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Padel SQL DB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/blob_unimported')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "unimported"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "matchId",
+						"type": "String"
+					},
+					{
+						"name": "date",
+						"type": "String"
+					},
+					{
+						"name": "matchNo",
+						"type": "String"
+					},
+					{
+						"name": "no1team1",
+						"type": "String"
+					},
+					{
+						"name": "no2team1",
+						"type": "String"
+					},
+					{
+						"name": "no1team2",
+						"type": "String"
+					},
+					{
+						"name": "no2team2",
+						"type": "String"
+					},
+					{
+						"name": "set1Team1GamesWon",
+						"type": "String"
+					},
+					{
+						"name": "set1Team2GamesWon",
+						"type": "String"
+					},
+					{
+						"name": "set2Team1GamesWon",
+						"type": "String"
+					},
+					{
+						"name": "set2Team2GamesWon",
+						"type": "String"
+					},
+					{
+						"name": "team1WinMatch",
+						"type": "String"
+					},
+					{
+						"name": "drawMatch",
+						"type": "String"
+					},
+					{
+						"name": "team2WinMatch",
+						"type": "String"
+					},
+					{
+						"name": "no1team1PostRating",
+						"type": "String"
+					},
+					{
+						"name": "no2team1PostRating",
+						"type": "String"
+					},
+					{
+						"name": "no1team2PostRating",
+						"type": "String"
+					},
+					{
+						"name": "no2team2PostRating",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
 			]
 		},
 		{
@@ -173,7 +225,9 @@
 								"type": "DelimitedTextSource",
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSetting",
-									"recursive": true
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
 									"type": "DelimitedTextReadSetting"
@@ -189,14 +243,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "Raw",
+								"referenceName": "blob_unimported",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "PadelData",
+								"referenceName": "SQL_PadelData",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -206,8 +260,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Raw')]",
-				"[concat(variables('factoryId'), '/datasets/PadelData')]"
+				"[concat(variables('factoryId'), '/datasets/blob_unimported')]",
+				"[concat(variables('factoryId'), '/datasets/SQL_PadelData')]"
 			]
 		}
 	]

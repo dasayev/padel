@@ -7,13 +7,13 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "PadelDataFactory"
 		},
-		"AzureBlobStorage_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage'"
-		},
 		"Padel SQL DB_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Padel SQL DB'"
+		},
+		"AzureBlobStorage_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "PadelBlobConnectionString"
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -46,14 +46,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureBlobStorage_connectionString": {
-						"value": "[parameters('AzureBlobStorage_connectionString')]"
-					},
 					"Padel SQL DB_connectionString": {
 						"value": "[parameters('Padel SQL DB_connectionString')]"
 					},
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"AzureBlobStorage_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureBlobStorage_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},

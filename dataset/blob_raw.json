@@ -1,0 +1,59 @@
+{
+	"name": "blob_raw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Tidstämpel",
+				"type": "String"
+			},
+			{
+				"name": "date",
+				"type": "String"
+			},
+			{
+				"name": "matchNo",
+				"type": "String"
+			},
+			{
+				"name": "team1",
+				"type": "String"
+			},
+			{
+				"name": "team2",
+				"type": "String"
+			},
+			{
+				"name": "gamesWonSet1 [team1]",
+				"type": "String"
+			},
+			{
+				"name": "gamesWonSet1 [team2]",
+				"type": "String"
+			},
+			{
+				"name": "gamesWonSet2 [team1]",
+				"type": "String"
+			},
+			{
+				"name": "gamesWonSet2 [team2]",
+				"type": "String"
+			}
+		]
+	}
+}

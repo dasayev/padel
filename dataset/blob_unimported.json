@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "*",
 				"container": "unimported"
 			},
 			"columnDelimiter": ",",
@@ -20,30 +19,75 @@
 		},
 		"schema": [
 			{
+				"name": "matchId",
 				"type": "String"
 			},
 			{
+				"name": "date",
 				"type": "String"
 			},
 			{
+				"name": "matchNo",
 				"type": "String"
 			},
 			{
+				"name": "no1team1",
 				"type": "String"
 			},
 			{
+				"name": "no2team1",
 				"type": "String"
 			},
 			{
+				"name": "no1team2",
 				"type": "String"
 			},
 			{
+				"name": "no2team2",
 				"type": "String"
 			},
 			{
+				"name": "set1Team1GamesWon",
 				"type": "String"
 			},
 			{
+				"name": "set1Team2GamesWon",
+				"type": "String"
+			},
+			{
+				"name": "set2Team1GamesWon",
+				"type": "String"
+			},
+			{
+				"name": "set2Team2GamesWon",
+				"type": "String"
+			},
+			{
+				"name": "team1WinMatch",
+				"type": "String"
+			},
+			{
+				"name": "drawMatch",
+				"type": "String"
+			},
+			{
+				"name": "team2WinMatch",
+				"type": "String"
+			},
+			{
+				"name": "no1team1PostRating",
+				"type": "String"
+			},
+			{
+				"name": "no2team1PostRating",
+				"type": "String"
+			},
+			{
+				"name": "no1team2PostRating",
+				"type": "String"
+			},
+			{
+				"name": "no2team2PostRating",
 				"type": "String"
 			}
 		]

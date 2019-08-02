@@ -35,13 +35,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Unprocessed",
+						"referenceName": "blob_unimported",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "PadelData",
+						"referenceName": "SQL_PadelData",
 						"type": "DatasetReference"
 					}
 				]

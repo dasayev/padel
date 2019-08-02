@@ -1,5 +1,5 @@
 {
-	"name": "Unprocessed",
+	"name": "blob_unimported",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage",
@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "*",
 				"container": "unimported"
 			},
 			"columnDelimiter": ",",

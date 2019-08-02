@@ -1,5 +1,5 @@
 {
-	"name": "PadelData",
+	"name": "SQL_PadelData",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Padel SQL DB",

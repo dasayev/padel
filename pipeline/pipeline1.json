@@ -35,7 +35,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Raw",
+						"referenceName": "Unprocessed",
 						"type": "DatasetReference"
 					}
 				],

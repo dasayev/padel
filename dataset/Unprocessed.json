@@ -1,5 +1,5 @@
 {
-	"name": "Raw",
+	"name": "Unprocessed",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage",
@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "padel_results.csv",
-				"container": "padel"
+				"container": "unimported"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

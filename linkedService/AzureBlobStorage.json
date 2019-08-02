@@ -1,7 +1,6 @@
 {
 	"name": "AzureBlobStorage",
 	"properties": {
-		"description": "The padel blob",
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {

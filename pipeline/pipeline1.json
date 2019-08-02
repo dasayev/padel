@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LoadIntoPadelDB",
+				"name": "blob_to_sql",
+				"description": "Copies data from the 'unimported' blob to PadelData table in DB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

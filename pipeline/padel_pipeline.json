@@ -48,6 +48,249 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "unimported_to_archived",
+				"description": "Moves files that have been unimported to SQL from blob unimported to blob archived",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "blob_to_sql",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSetting",
+							"recursive": true,
+							"wildcardFileName": "*.*"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSetting"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSetting"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSetting",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "matchId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "matchId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "matchNo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "matchNo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no1team1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no1team1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no2team1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no2team1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no1team2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no1team2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no2team2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no2team2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "set1Team1GamesWon",
+									"type": "String"
+								},
+								"sink": {
+									"name": "set1Team1GamesWon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "set1Team2GamesWon",
+									"type": "String"
+								},
+								"sink": {
+									"name": "set1Team2GamesWon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "set2Team1GamesWon",
+									"type": "String"
+								},
+								"sink": {
+									"name": "set2Team1GamesWon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "set2Team2GamesWon",
+									"type": "String"
+								},
+								"sink": {
+									"name": "set2Team2GamesWon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "team1WinMatch",
+									"type": "String"
+								},
+								"sink": {
+									"name": "team1WinMatch",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "drawMatch",
+									"type": "String"
+								},
+								"sink": {
+									"name": "drawMatch",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "team2WinMatch",
+									"type": "String"
+								},
+								"sink": {
+									"name": "team2WinMatch",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no1team1PostRating",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no1team1PostRating",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no2team1PostRating",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no2team1PostRating",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no1team2PostRating",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no1team2PostRating",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "no2team2PostRating",
+									"type": "String"
+								},
+								"sink": {
+									"name": "no2team2PostRating",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "blob_unimported",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "blob_archived",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

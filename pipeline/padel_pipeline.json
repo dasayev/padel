@@ -314,19 +314,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSetting",
-							"recursive": true,
-							"wildcardFileName": "*.*",
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSetting"
-						}
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT MAX(matchId)\nFROM Fct_Result\n"
 					},
 					"dataset": {
-						"referenceName": "blob_unimported",
+						"referenceName": "SQL_Fct_Result",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false

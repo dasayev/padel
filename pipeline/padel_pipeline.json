@@ -6,14 +6,7 @@
 				"name": "blob_to_sql",
 				"description": "Copies data from the 'unimported' blob to PadelData table in DB",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "MAX MatchId in SQL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -300,10 +293,16 @@
 				]
 			},
 			{
-				"name": "MAX MatchId in SQL",
-				"description": "The latest match currently imported in the star schema in SQL",
-				"type": "Lookup",
-				"dependsOn": [],
+				"name": "Stored Procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "blob_to_sql",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -313,15 +312,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT MAX(matchId)\nFROM Fct_Result\n"
-					},
-					"dataset": {
-						"referenceName": "SQL_Fct_Result",
-						"type": "DatasetReference"
-					},
-					"firstRowOnly": false
+					"storedProcedureName": "[dbo].[cusp_InsertStarSchema]"
+				},
+				"linkedServiceName": {
+					"referenceName": "Padel SQL DB",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],

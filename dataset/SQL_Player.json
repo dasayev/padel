@@ -1,0 +1,25 @@
+{
+	"name": "SQL_Player",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Padel SQL DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "playerId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "playerName",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Dim_Player]"
+		}
+	}
+}

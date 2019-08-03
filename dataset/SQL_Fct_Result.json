@@ -1,0 +1,91 @@
+{
+	"name": "SQL_Fct_Result",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Padel SQL DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "matchId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "dateId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "teamId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "opponentTeamId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set1GamesWon",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set1GamesLost",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set1Won",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set2GamesWon",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set2GamesLost",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set2Won",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "tiebreaksPlayed",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "tiebreaksWon",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "matchWin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "matchDraw",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "matchLoss",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Fct_Result]"
+		}
+	}
+}

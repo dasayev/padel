@@ -7,7 +7,93 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "matchId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "date",
+				"type": "date"
+			},
+			{
+				"name": "matchNo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "no1team1",
+				"type": "varchar"
+			},
+			{
+				"name": "no2team1",
+				"type": "varchar"
+			},
+			{
+				"name": "no1team2",
+				"type": "varchar"
+			},
+			{
+				"name": "no2team2",
+				"type": "varchar"
+			},
+			{
+				"name": "set1Team1GamesWon",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set1Team2GamesWon",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set2Team1GamesWon",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "set2Team2GamesWon",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "team1WinMatch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "drawMatch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "team2WinMatch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "no1team1PostRating",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "no2team1PostRating",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "no1team2PostRating",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "no2team2PostRating",
+				"type": "float",
+				"precision": 15
+			}
+		],
 		"typeProperties": {
 			"tableName": "[dbo].[PadelData]"
 		}

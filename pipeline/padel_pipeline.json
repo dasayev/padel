@@ -19,13 +19,13 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobStorageReadSetting",
+							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSetting"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -73,21 +73,21 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobStorageReadSetting",
+							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"wildcardFileName": "*.*"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSetting"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSetting"
+							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSetting",
+							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
 							"fileExtension": ".csv"
 						}
@@ -316,6 +316,27 @@
 				},
 				"linkedServiceName": {
 					"referenceName": "Padel SQL DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "google_drive_to_blob",
+				"description": "Downloads padel results data from Google Drive and saves it in blob container 'raw'",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/erik_grip@hotmail.com/getGoogleDriveData"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
 					"type": "LinkedServiceReference"
 				}
 			}

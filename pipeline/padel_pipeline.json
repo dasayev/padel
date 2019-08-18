@@ -340,7 +340,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/erik_grip@hotmail.com/cleanAndTransform"
+					"notebookPath": "/Shared/padel/cleanAndTransform"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks1",

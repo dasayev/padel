@@ -6,7 +6,14 @@
 				"name": "blob_to_sql",
 				"description": "Copies data from the 'unimported' blob to PadelData table in DB",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "clean_and_transform",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -333,7 +340,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/erik_grip@hotmail.com/getGoogleDriveData"
+					"notebookPath": "/Users/erik_grip@hotmail.com/cleanAndTransform"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks1",
@@ -345,9 +352,9 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "google_drive_to_blob",
+						"activity": "Get Metadata1",
 						"dependencyConditions": [
-							"Succeeded"
+							"Failed"
 						]
 					}
 				],
@@ -424,6 +431,45 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "google_drive_to_blob",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "blob_raw",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"itemName",
+						"childItems",
+						"itemType",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
 			}
 		],
 		"annotations": []

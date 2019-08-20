@@ -340,7 +340,19 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/padel/cleanAndTransform"
+					"notebookPath": "/Shared/padel/getGoogleDriveData",
+					"libraries": [
+						{
+							"pypi": {
+								"package": "google-api-python-client"
+							}
+						},
+						{
+							"pypi": {
+								"package": "oauth2client"
+							}
+						}
+					]
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks1",
